@@ -2,7 +2,7 @@
 
 # klink-skills
 
-My personal [Agent Skills](https://docs.claude.com/en/docs/claude-code/skills) for Claude Code (and any other agent that reads `SKILL.md` folders).
+My personal [Agent Skills](https://agentskills.io) for Claude Code, Codex and Gemini CLI (any agent that reads `SKILL.md` folders).
 
 ## Layout
 
@@ -15,7 +15,7 @@ vendor/
   mattpocock/       # git subtree of github.com/mattpocock/skills
   t3dotgg/          # git subtree of github.com/t3dotgg/tstack
 SKILLS.md           # checklist: tick the vendored skills you want
-install.sh          # applies SKILLS.md, then symlinks skills/* into ~/.claude/skills
+install.sh          # applies SKILLS.md, then symlinks skills/* into ~/.claude/skills and ~/.agents/skills
 update-vendor.sh    # pulls upstream changes into vendor/ and reinstalls
 scripts/skills.py   # checklist sync/apply logic used by install.sh
 .claude-plugin/     # lets this repo be installed as a Claude Code plugin
@@ -27,13 +27,19 @@ scripts/skills.py   # checklist sync/apply logic used by install.sh
 
 ```sh
 git clone https://github.com/dogmar/klink-skills.git
-cd klink-skills && ./install.sh            # -> ~/.claude/skills
-./install.sh ~/.codex/skills               # or any other agent's skills dir
+cd klink-skills && ./install.sh            # -> ~/.claude/skills and ~/.agents/skills
+./install.sh ~/some/other/skills           # or only the dirs you name
 ```
+
+| Agent | Reads | Notes |
+| --- | --- | --- |
+| Claude Code | `~/.claude/skills` | Ignores `~/.agents/skills`, so no duplicates |
+| Codex | `~/.agents/skills` | |
+| Gemini CLI | `~/.agents/skills` (and `~/.gemini/skills`) | Install to only one of the two, or skills load twice |
 
 Re-run `./install.sh` after adding, renaming, or removing a skill.
 
-**As a Claude Code plugin:**
+**As a Claude Code plugin (Claude Code only):**
 
 ```
 /plugin marketplace add dogmar/klink-skills
