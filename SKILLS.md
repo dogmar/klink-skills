@@ -6,7 +6,7 @@ Text after `//` is your own note and survives updates. My own skills (real folde
 ## mattpocock / engineering
 
 - [x] **ask-matt** — Ask which skill or flow fits your situation. A router over the skills in this repo. `vendor/mattpocock/skills/engineering/ask-matt`
-- [ ] **code-review** — Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes: Standards (does the code follow this repo's documented coding sta… `vendor/mattpocock/skills/engineering/code-review` // Same name as Claude Code's built-in /code-review — leave unticked unless you want to replace it
+- [x] **code-review** — Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes: Standards (does the code follow this repo's documented coding sta… `vendor/mattpocock/skills/engineering/code-review` // Same name as Claude Code's built-in /code-review — leave unticked unless you want to replace it
 - [x] **codebase-design** — Shared vocabulary for designing deep modules. Use when the user wants to design or improve a module's interface, find deepening opportunities, decide where a… `vendor/mattpocock/skills/engineering/codebase-design`
 - [x] **diagnosing-bugs** — Diagnosis loop for hard bugs and performance regressions. Use when the user says "diagnose"/"debug this", or reports something broken/throwing/failing/slow. `vendor/mattpocock/skills/engineering/diagnosing-bugs`
 - [x] **domain-modeling** — Build and sharpen a project's domain model. Use when discussing codebase terminology, writing or editing a GLOSSARY.md, or recording or editing an ADR. `vendor/mattpocock/skills/engineering/domain-modeling`
@@ -56,12 +56,12 @@ Text after `//` is your own note and survives updates. My own skills (real folde
 
 ## t3dotgg
 
-- [ ] **babysit-pr** — Monitor a pull request through review and CI. Use when the user asks to monitor, watch, or babysit a PR. `vendor/t3dotgg/skills/babysit-pr`
-- [ ] **council** — Trigger this if the user says 'council'. `vendor/t3dotgg/skills/council` // Asks three models from three different AI providers to review your work at once
-- [ ] **file-pr** — File a concise pull request. Use when the user asks to file, open, or create a PR. `vendor/t3dotgg/skills/file-pr`
+- [x] **babysit-pr** — Monitor a pull request through review and CI. Use when the user asks to monitor, watch, or babysit a PR. `vendor/t3dotgg/skills/babysit-pr`
+- [x] **council** — Trigger this if the user says 'council'. `vendor/t3dotgg/skills/council` // Asks three models from three different AI providers to review your work at once
+- [x] **file-pr** — File a concise pull request. Use when the user asks to file, open, or create a PR. `vendor/t3dotgg/skills/file-pr`
 - [ ] **full-send** — Trigger this if the user says 'full send'. `vendor/t3dotgg/skills/full-send` // Hands-off: the agent finishes the work all the way to a merged PR
-- [ ] **full-stop** — Trigger this if the user says 'full stop', even as a closing "Full stop." that reads like emphasis. `vendor/t3dotgg/skills/full-stop` // Same as full-send, but stops at a PR that's ready to merge (reads full-send's file)
-- [ ] **leaving-pr-comments** — Use whenever leaving comments on GitHub. `vendor/t3dotgg/skills/leaving-pr-comments` // Labels every GitHub comment the agent leaves as written by the agent for you
-- [ ] **modernize** — For getting old prs up to date. Use when asked to rebase a pr or "modernize". `vendor/t3dotgg/skills/modernize`
-- [ ] **sol-loop** — Use when the user says "sol loop". `vendor/t3dotgg/skills/sol-loop` // Has OpenAI's GPT Sol review your changes in a loop, 3 rounds by default
-- [ ] **takeover** — Take over existing work. Use when the user asks to take over a PR, branch, or agent thread, or requests a takeover. `vendor/t3dotgg/skills/takeover`
+- [x] **full-stop** — Trigger this if the user says 'full stop', even as a closing "Full stop." that reads like emphasis. `vendor/t3dotgg/skills/full-stop` // Same as full-send, but stops at a PR that's ready to merge (reads full-send's file)
+- [x] **leaving-pr-comments** — Use whenever leaving comments on GitHub. `vendor/t3dotgg/skills/leaving-pr-comments` // Labels every GitHub comment the agent leaves as written by the agent for you
+- [x] **modernize** — For getting old prs up to date. Use when asked to rebase a pr or "modernize". `vendor/t3dotgg/skills/modernize`
+- [x] **sol-loop** — Use when the user says "sol loop". `vendor/t3dotgg/skills/sol-loop` // Has OpenAI's GPT Sol review your changes in a loop, 3 rounds by default
+- [x] **takeover** — Take over existing work. Use when the user asks to take over a PR, branch, or agent thread, or requests a takeover. `vendor/t3dotgg/skills/takeover`
