@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Keep SKILLS.md (the vendored-skill checklist) and the symlinks in skills/ in step.
 
-  skills.py sync   rebuild SKILLS.md from vendor/*/ — keeps your ticks and // notes,
+  skills.py sync   rebuild SKILLS.md from vendor/*/ — keeps your ticks, `as` renames and // notes,
                    adds new upstream skills unticked, drops ones upstream removed
   skills.py apply  make skills/ hold exactly one symlink per ticked skill
 """
@@ -13,11 +13,13 @@ REPO = Path(__file__).resolve().parent.parent
 CHECKLIST = REPO / "SKILLS.md"
 SKILLS = REPO / "skills"
 VENDOR = REPO / "vendor"
-LINE = re.compile(r"^- \[([ xX])\] .*?`(vendor/[^`]+)`(?:\s*//\s*(.*))?$")
+LINE = re.compile(r"^- \[([ xX])\] .*?`(vendor/[^`]+)`(?:\s+as\s+`([^`]+)`)?(?:\s*//\s*(.*))?$")
+NAME = re.compile(r"^[a-z0-9][a-z0-9-]*$")
 HEADER = """# Skills checklist
 
 Vendored skills from `vendor/`. Tick `[x]` to install, untick to remove, then run `./install.sh`.
-Text after `//` is your own note and survives updates. My own skills (real folders in `skills/`) are always installed.
+Append `` as `new-name` `` after the path to install a skill under a different name (Claude Code names a skill after its folder).
+Text after `//` is your own note. Both survive updates. My own skills (real folders in `skills/`) are always installed.
 """
 
 
@@ -49,7 +51,7 @@ def read_checklist() -> dict:
         for line in CHECKLIST.read_text().splitlines():
             m = LINE.match(line)
             if m:
-                state[m.group(2)] = (m.group(1).lower() == "x", m.group(3) or "")
+                state[m.group(2)] = (m.group(1).lower() == "x", m.group(3) or "", m.group(4) or "")
     return state
 
 
@@ -66,11 +68,13 @@ def sync() -> None:
             title = source.name if category == "." else f"{source.name} / {category}"
             out.append(f"## {title}\n")
             for rel, skill_md in items:
-                ticked, note = state.get(rel, (False, ""))
+                ticked, alias, note = state.get(rel, (False, "", ""))
                 desc = frontmatter_description(skill_md)
                 if len(desc) > 160:
                     desc = desc[:157].rstrip() + "…"
                 line = f"- [{'x' if ticked else ' '}] **{skill_md.parent.name}** — {desc} `{rel}`"
+                if alias:
+                    line += f" as `{alias}`"
                 if note:
                     line += f" // {note}"
                 out.append(line)
@@ -80,12 +84,14 @@ def sync() -> None:
 
 def apply() -> None:
     wanted = {}
-    for rel, (ticked, _) in read_checklist().items():
+    for rel, (ticked, alias, _) in read_checklist().items():
         if not ticked:
             continue
         if not (REPO / rel / "SKILL.md").exists():
             sys.exit(f"SKILLS.md: {rel} has no SKILL.md (run ./update-vendor.sh or untick it)")
-        name = Path(rel).name
+        name = alias or Path(rel).name
+        if not NAME.match(name):
+            sys.exit(f"SKILLS.md: '{name}' is not a valid skill name (lowercase letters, digits, hyphens)")
         if name in wanted:
             sys.exit(f"SKILLS.md: two ticked skills are named '{name}': {wanted[name]} and {rel}")
         wanted[name] = rel

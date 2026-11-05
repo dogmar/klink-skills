@@ -1,12 +1,13 @@
 # Skills checklist
 
 Vendored skills from `vendor/`. Tick `[x]` to install, untick to remove, then run `./install.sh`.
-Text after `//` is your own note and survives updates. My own skills (real folders in `skills/`) are always installed.
+Append `` as `new-name` `` after the path to install a skill under a different name (Claude Code names a skill after its folder).
+Text after `//` is your own note. Both survive updates. My own skills (real folders in `skills/`) are always installed.
 
 ## mattpocock / engineering
 
 - [x] **ask-matt** — Ask which skill or flow fits your situation. A router over the skills in this repo. `vendor/mattpocock/skills/engineering/ask-matt`
-- [x] **code-review** — Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes: Standards (does the code follow this repo's documented coding sta… `vendor/mattpocock/skills/engineering/code-review` // Same name as Claude Code's built-in /code-review — leave unticked unless you want to replace it
+- [x] **code-review** — Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes: Standards (does the code follow this repo's documented coding sta… `vendor/mattpocock/skills/engineering/code-review` as `pocock-review` // Renamed so Claude Code's built-in /code-review stays available
 - [x] **codebase-design** — Shared vocabulary for designing deep modules. Use when the user wants to design or improve a module's interface, find deepening opportunities, decide where a… `vendor/mattpocock/skills/engineering/codebase-design`
 - [x] **diagnosing-bugs** — Diagnosis loop for hard bugs and performance regressions. Use when the user says "diagnose"/"debug this", or reports something broken/throwing/failing/slow. `vendor/mattpocock/skills/engineering/diagnosing-bugs`
 - [x] **domain-modeling** — Build and sharpen a project's domain model. Use when discussing codebase terminology, writing or editing a GLOSSARY.md, or recording or editing an ADR. `vendor/mattpocock/skills/engineering/domain-modeling`
