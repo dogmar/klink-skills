@@ -1,0 +1,11 @@
+{
+  "name": "klink-skills",
+  "owner": { "name": "Chris Klink" },
+  "plugins": [
+    {
+      "name": "klink-skills",
+      "source": "./",
+      "description": "Chris Klink's personal agent skills"
+    }
+  ]
+}
