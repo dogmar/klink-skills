@@ -21,7 +21,7 @@ install.sh          # symlinks skills/* into ~/.claude/skills
 
 ## Install
 
-**Local symlinks (recommended on your main machine — edits are live):**
+**Clone + symlinks (edits are live):**
 
 ```sh
 git clone https://github.com/dogmar/klink-skills.git
@@ -31,14 +31,14 @@ cd klink-skills && ./install.sh            # -> ~/.claude/skills
 
 Re-run `./install.sh` after adding, renaming, or removing a skill.
 
-**As a Claude Code plugin (handy on other machines):**
+**As a Claude Code plugin:**
 
 ```
 /plugin marketplace add dogmar/klink-skills
 /plugin install klink-skills@klink-skills
 ```
 
-Plugin skills are namespaced, e.g. `/klink-skills:new-skill`. The repo is private, so `gh auth login` must be set up on that machine.
+Plugin skills are namespaced, e.g. `/klink-skills:new-skill`.
 
 ## Vendored skills
 
@@ -86,3 +86,7 @@ The `description` decides when the agent loads the skill — name each distinct 
 | `new-skill` | Scaffolds a new skill in this repo and installs it |
 
 Plus the vendored skills linked in `skills/` (`ls -l skills`).
+
+## Credits
+
+`vendor/mattpocock/` is [mattpocock/skills](https://github.com/mattpocock/skills), MIT licensed (see `vendor/mattpocock/LICENSE`).
