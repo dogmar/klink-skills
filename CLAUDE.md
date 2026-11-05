@@ -5,4 +5,4 @@ Personal agent skills. Each skill is `skills/<name>/SKILL.md` (YAML frontmatter 
 - The frontmatter `name` must match the folder name.
 - After adding, renaming, or deleting a skill, run `./install.sh` to refresh the symlinks in `~/.claude/skills`.
 - Use the `new-skill` skill to scaffold new ones.
-- `vendor/<who>/` holds upstream skill sets as git subtrees; a symlink in `skills/` enables one (`./link-skill.sh <path>`). Edit vendored skills in place; `./update-vendor.sh` merges upstream changes.
+- `vendor/<who>/` holds upstream skill sets as git subtrees. `SKILLS.md` is the checklist of which ones are enabled; `./install.sh` turns ticks into symlinks in `skills/`. Never hand-create vendor symlinks in `skills/` — tick them in `SKILLS.md`. `./update-vendor.sh` merges upstream changes.

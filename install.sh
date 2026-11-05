@@ -1,10 +1,14 @@
 #!/usr/bin/env bash
-# Symlink every skill in ./skills into a skills directory (default: ~/.claude/skills).
+# Sync SKILLS.md ticks into skills/, then symlink every skill in ./skills into a
+# skills directory (default: ~/.claude/skills).
 # Usage: ./install.sh [target-dir]     e.g. ./install.sh ~/.codex/skills
 set -euo pipefail
 
 repo="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 target="${1:-$HOME/.claude/skills}"
+
+python3 -I "$repo/scripts/skills.py" sync
+python3 -I "$repo/scripts/skills.py" apply
 mkdir -p "$target"
 
 for dir in "$repo"/skills/*/; do

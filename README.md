@@ -12,10 +12,12 @@ skills/
     SKILL.md        # frontmatter (name, description) + instructions
     ...             # optional references, templates, scripts
 vendor/
-  mattpocock/       # git subtree of github.com/mattpocock/skills (edit freely; changes merge on pull)
-link-skill.sh       # adopt a vendored skill: symlinks it into skills/
-update-vendor.sh    # pull upstream changes into vendor/
-install.sh          # symlinks skills/* into ~/.claude/skills
+  mattpocock/       # git subtree of github.com/mattpocock/skills
+  t3dotgg/          # git subtree of github.com/t3dotgg/tstack
+SKILLS.md           # checklist: tick the vendored skills you want
+install.sh          # applies SKILLS.md, then symlinks skills/* into ~/.claude/skills
+update-vendor.sh    # pulls upstream changes into vendor/ and reinstalls
+scripts/skills.py   # checklist sync/apply logic used by install.sh
 .claude-plugin/     # lets this repo be installed as a Claude Code plugin
 ```
 
@@ -42,21 +44,19 @@ Plugin skills are namespaced, e.g. `/klink-skills:new-skill`.
 
 ## Vendored skills
 
-`skills/` is the menu of what gets installed. A vendored skill is enabled by a relative symlink in `skills/` pointing into `vendor/`.
+Pick upstream skills in **[`SKILLS.md`](SKILLS.md)**: tick `[x]` to install, untick to remove, then run `./install.sh`. Ticked skills become relative symlinks in `skills/` (which keeps plugin installs working); your own skills are real folders there and are always installed. Text after `//` on a line is your own note and survives updates.
 
 ```sh
-./link-skill.sh vendor/mattpocock/skills/engineering/code-review   # enable one
-rm skills/teach && ./install.sh                                    # disable one
-./update-vendor.sh                                                 # pull upstream changes
+./update-vendor.sh   # pull upstream changes; new upstream skills show up unticked in SKILLS.md
 ```
 
-Edit vendored skills in place under `vendor/`; `git subtree pull` merges upstream changes with yours (resolve conflicts like any merge). To add another upstream set:
+Vendored skills can be edited in place under `vendor/`; `git subtree pull` merges upstream changes with yours. To add another upstream set:
 
 ```sh
 git subtree add --prefix=vendor/<who> https://github.com/<who>/<repo>.git main --squash
 ```
 
-…and add a matching `git subtree pull` line to `update-vendor.sh`.
+…add a matching `pull` line to `update-vendor.sh`, then run `./install.sh` to list its skills in `SKILLS.md`.
 
 ## Adding a skill
 
@@ -85,8 +85,9 @@ The `description` decides when the agent loads the skill — name each distinct 
 | --- | --- |
 | `new-skill` | Scaffolds a new skill in this repo and installs it |
 
-Plus the vendored skills linked in `skills/` (`ls -l skills`).
+Plus the vendored skills ticked in [`SKILLS.md`](SKILLS.md).
 
 ## Credits
 
-`vendor/mattpocock/` is [mattpocock/skills](https://github.com/mattpocock/skills), MIT licensed (see `vendor/mattpocock/LICENSE`).
+- `vendor/mattpocock/` is [mattpocock/skills](https://github.com/mattpocock/skills), MIT licensed (see `vendor/mattpocock/LICENSE`).
+- `vendor/t3dotgg/` is [t3dotgg/tstack](https://github.com/t3dotgg/tstack), MIT licensed (see `vendor/t3dotgg/LICENSE`).
