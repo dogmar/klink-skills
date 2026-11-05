@@ -44,7 +44,7 @@ Plugin skills are namespaced, e.g. `/klink-skills:new-skill`.
 
 ## Vendored skills
 
-Pick upstream skills in **[`SKILLS.md`](SKILLS.md)**: tick `[x]` to install, untick to remove, then run `./install.sh`. Ticked skills become relative symlinks in `skills/` (which keeps plugin installs working); your own skills are real folders there and are always installed. Append `` as `new-name` `` after a skill's path to install it under another name (Claude Code names skills after their folder), e.g. Matt's `code-review` is installed as `pocock-review` so the built-in `/code-review` still works. Text after `//` on a line is your own note. Both survive updates.
+Pick upstream skills in **[`SKILLS.md`](SKILLS.md)**: tick `[x]` to install, untick to remove, then run `./install.sh`. Ticked skills become relative symlinks in `skills/` (which keeps plugin installs working); your own skills are real folders there and are always installed. Append `` as `new-name` `` after a skill's path to install it under another name (Claude Code names skills after their folder), e.g. Matt's `code-review` is installed as `matt-review` so the built-in `/code-review` still works. Text after `//` on a line is your own note. Both survive updates.
 
 ```sh
 ./update-vendor.sh   # pull upstream changes; new upstream skills show up unticked in SKILLS.md
