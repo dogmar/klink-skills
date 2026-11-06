@@ -8,7 +8,7 @@ description: Trigger this if the user says 'full stop', even as a closing "Full 
 Do the same work as `full-send`, but stop with the PR ready for the user to merge.
 Never merge it.
 
-Read [full-send](../full-send/SKILL.md) and follow its workflow, proof rules,
+Read [full-send](full-send.md) and follow its workflow, proof rules,
 review, and babysitting steps. An explicit "full stop" request authorizes that
 work without a separate "full send" request. That includes full-send's
 testing permission. A "full stop" request is the permission for the test
