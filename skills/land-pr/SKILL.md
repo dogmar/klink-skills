@@ -9,14 +9,16 @@ Load the `babysit-pr` skill and follow it for waiting, review bots, rate limits,
 
 ## Guardrails
 
-Approval and merge policy belong to humans. Your lane is the code on the PR branch and one `gh pr merge --auto` call at the start. Hard rules, with no exceptions:
+Approval and merge policy belong to humans. Your lane is the code on the PR branch, one `gh pr merge --auto` call at the start, and the message refresh below. Hard rules, with no exceptions:
 
 - Never approve the PR, from any account or token.
 - Never merge with `--admin` or otherwise bypass branch protection.
 - Never dismiss a review or resolve a human's review thread.
 - Never change repository or branch-protection settings.
 - Never weaken CI to get green: no skipped or deleted tests, no `continue-on-error`, no edits to which checks are required.
-- Never turn auto-merge back on after it turns off. Turning it on once in step 1 is the only time.
+- Turn auto-merge on in step 1 and, after that, only in a message refresh. Once auto-merge is off for any other reason, leave it off: that is a blocker.
+
+**Message refresh.** GitHub fixes a squash merge's commit message when auto-merge is turned on, so a later edit to the PR's title or body never reaches the commit. When you have edited them and auto-merge is on, turn it off and straight back on with the same method: `gh pr merge <pr> --disable-auto`, then `gh pr merge <pr> --auto --<method>`. Do this only while auto-merge is on, and only to carry the edited title and body into the commit.
 
 ## 1. Start
 
@@ -37,6 +39,7 @@ Each wake: handle what changed, re-check blockers, report if the blocker set cha
 - **Human review feedback:** fix what they asked for, reply on their comments, leave their threads open, and re-request their review with `gh pr edit <pr> --add-reviewer <login>`.
 - **Merge queue drops the PR:** fix the failure like any CI failure. Rejoining the queue needs auto-merge back on, which is a blocker for a human.
 - **After every push:** re-read `reviewDecision` and `autoMergeRequest`. A push can dismiss an approval as stale or turn auto-merge off; both change the blocker set.
+- **After you edit the PR's title or body:** if auto-merge is on, run the [message refresh](#guardrails) so the commit carries the edit.
 
 Wait with one watcher, as `babysit-pr` describes:
 
