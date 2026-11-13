@@ -66,25 +66,19 @@ Anything that stops auto-merge and needs a human:
 Send a report when the blocker set changes, every 8 hours, and at the finish. Write it in the thread as rendered Markdown (not inside a code block), following this template:
 
 ```markdown
-### [owner/repo#123](https://github.com/owner/repo/pull/123): <PR title>
+### [#123 PR title](<pr url>)
 
-**Head:** [`abc1234`](https://github.com/owner/repo/commit/<sha>) · **Auto-merge:** on (squash)
+- ✋ **Review:** [changes requested](<review url>) by @reviewer · waiting 3h
+- 🔧 **CI:** fixing [test (ubuntu)](<check run url>)
+- ✅ **Auto-merge:** on (squash)
 
-| | Status |
-|---|---|
-| CI | ❌ failing: [`test (ubuntu)`](<check run url>) |
-| Review | ⏳ changes requested by [@reviewer](https://github.com/reviewer) |
-
-**Blockers (need a human)**
-- Changes requested by [@reviewer](<review url>), waiting 3h
-
-**Fixed since last report**
-- [`def5678`](<commit url>) Fix flaky date test
+**Fixed:** [Fix flaky date test](<commit url>)
 ```
 
-- Every URL is a Markdown link with readable text, never a bare URL: the PR, commits, failing checks, reviews, and people.
-- Status words lead with ✅, ❌, or ⏳ so the state scans at a glance.
-- An empty section reads _None_. The finish report heads with **Merged** or **Closed**.
+- One line per status, always CI, Review, and Auto-merge, plus a line per other blocker. Each opens with ✋ (needs a human: a blocker), 🔧 (you are fixing it), or ✅ (fine), sorted in that order.
+- Every URL becomes a link whose text is plain words: no bare URLs, no code spans inside links, at most one link per line. People are plain @login text, not links.
+- **Fixed:** lists what you changed since the last report as linked commit subjects, comma-separated; drop the line when nothing changed.
+- The finish report heads with `### ✅ Merged [#123 PR title](<pr url>)` or `### Closed …`.
 
 Where a `PushNotification` tool exists, also send one plain-text line (under 200 characters; notifications do not render Markdown) leading with what the user would act on, e.g. `land-pr #123: needs approval (waiting 2h); CI green`. Where it does not, the thread report is all; keep going either way.
 
