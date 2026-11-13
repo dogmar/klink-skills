@@ -63,18 +63,30 @@ Anything that stops auto-merge and needs a human:
 
 ## Reporting
 
-Send a report when the blocker set changes, every 8 hours, and at the finish. Write it in the thread:
+Send a report when the blocker set changes, every 8 hours, and at the finish. Write it in the thread as rendered Markdown (not inside a code block), following this template:
 
-```
-<PR url> @ <short head SHA>
-CI: <green | failing: names | pending>
-Review: <approved | review required | changes requested by @x>
-Auto-merge: <on (method) | off>
-Blockers: <each, with how long it has waited | none>
-Fixed since last report: <commits/actions | nothing>
+```markdown
+### [owner/repo#123](https://github.com/owner/repo/pull/123): <PR title>
+
+**Head:** [`abc1234`](https://github.com/owner/repo/commit/<sha>) · **Auto-merge:** on (squash)
+
+| | Status |
+|---|---|
+| CI | ❌ failing: [`test (ubuntu)`](<check run url>) |
+| Review | ⏳ changes requested by [@reviewer](https://github.com/reviewer) |
+
+**Blockers (need a human)**
+- Changes requested by [@reviewer](<review url>), waiting 3h
+
+**Fixed since last report**
+- [`def5678`](<commit url>) Fix flaky date test
 ```
 
-Where a `PushNotification` tool exists, also send one line (under 200 characters) leading with what the user would act on, e.g. `land-pr #123: needs approval (waiting 2h); CI green`. Where it does not, the thread report is all; keep going either way.
+- Every URL is a Markdown link with readable text, never a bare URL: the PR, commits, failing checks, reviews, and people.
+- Status words lead with ✅, ❌, or ⏳ so the state scans at a glance.
+- An empty section reads _None_. The finish report heads with **Merged** or **Closed**.
+
+Where a `PushNotification` tool exists, also send one plain-text line (under 200 characters; notifications do not render Markdown) leading with what the user would act on, e.g. `land-pr #123: needs approval (waiting 2h); CI green`. Where it does not, the thread report is all; keep going either way.
 
 The 8-hour timer:
 
